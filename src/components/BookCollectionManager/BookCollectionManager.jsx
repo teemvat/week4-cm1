@@ -37,10 +37,10 @@ function BookCollectionManager() {
   }
 
   return (
-    <div className='flex flex-col '>
+    <div className='flex flex-col rounded-md '>
       <h1 className='text-center font-serif font-bold'>Book Collection Manager</h1>
       <div>
-        <form className='flex flex-col m-2 '>
+        <form className='flex flex-col '>
           <input
             className="m-2 p-2 rounded-md border"
             type="text"
@@ -57,7 +57,7 @@ function BookCollectionManager() {
             placeholder='Year of Publication'
             onChange={handleYearChange} />
           <button
-            className='border bg-green-600 hover:bg-green-400 transition text-white rounded-md p-2 m-2'
+            className='w-32 border bg-lime-600 hover:bg-lime-500 transition text-white rounded-md p-2 m-2'
             onClick={() => addBook()}>
             Add Book
           </button>
@@ -67,19 +67,18 @@ function BookCollectionManager() {
         {books.map((book, index) =>
           <li key={index}>
             <div
-              className='flex m-2 justify-between items-center'>
+              className='flex justify-between items-center'>
               <h2
                 className='text-2xl font-bold'>{book.title}</h2>
               <p><b>Author: </b>{book.author}</p>
               <p><b>Year: </b>{book.year}</p>
               <button
-                className='border bg-red-600 hover:bg-red-400 font-sans transition text-white rounded-md p-2 m-2 w-20'
+                className='border bg-red-600 hover:bg-red-500 font-sans transition text-white rounded-md p-2 w-20'
                 onClick={() => deleteBook(index)}>
                 Delete
               </button>
             </div>
-            <hr class="border-t border-gray-300 my-4" />
-
+            <hr class="border-t border-gray-300 my-2" />
           </li>
         )}
       </ol>

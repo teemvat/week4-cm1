@@ -2,7 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { styles } from "./SignupPageStyle";
 
-let registeredUsers = [];
+let registeredUsers = [
+  { id: 1, name: "ville", email: "ville", password: "ville" },
+];
 let currentId = 1;
 
 const createUser = (name, email, password) => {
@@ -21,26 +23,65 @@ function SignupPage({ isModalOpen, closeModal, loginName }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loginVariable, setLoginVariable] = useState("Login");
-  const [showNameField, setShowNameField] = useState(false);
-  const [userRegistered, setUserRegistered] = useState(false);
+  const [showEmailField, setShowEmailField] = useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [pwFieldVariable, setPwFieldVariable] = useState("Give password");
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const userExists = registeredUsers.some(
-      (user) => user.email === email && user.password === password
+    const wrongPassword = registeredUsers.some(
+      (user) => user.name === name && user.password !== password
     );
 
-    if (showNameField) {
-      createUser(name, email, password);
-      closeModal();
-      loginName(name);
+    const accesGranted = registeredUsers.some(
+      (user) => user.name === name && user.password === password
+    );
+
+    switch (true) {
+       //if user enters wrong password message is shown in text field
+      case !userLoggedIn && wrongPassword:
+        setPwFieldVariable("Wrong password!");
+        setPassword("");
+        break;
+    //after user pressed logout button, next time modal is log in
+      case userLoggedIn:
+        setPwFieldVariable("Give password");
+        setShowEmailField(false);
+        setEmail("");
+        setLoginVariable("Login");
+        setUserLoggedIn(false);
+        loginName("Login");
+        closeModal();
+        break;
+    
+ //after registration
+      case !userLoggedIn && showEmailField:
+        createUser(name, email, password);
+        closeModal();
+        loginName(name);
+        setUserLoggedIn(true);
+        setShowEmailField(false);
+        setLoginVariable("Log Out");
+        break;
+    //if user not found, show email input-field for registration
+      case !userLoggedIn && !accesGranted:
+        setLoginVariable("Sign In");
+        setShowEmailField(true);
+        break;
+    
+
+      //if user is not logged in and login accesGranted next time modal is for logout
+      case !userLoggedIn:
+        closeModal();
+        loginName(name);
+        setUserLoggedIn(true);
+        setLoginVariable("Log Out");
+        break;
+    
 
     }
-
-    if (!userExists) {
-      setLoginVariable("Sign Up");
-      setShowNameField(true);
-    }
+    
   };
 
   return (
@@ -53,32 +94,41 @@ function SignupPage({ isModalOpen, closeModal, loginName }) {
         </div>
         <h1 className={styles.h1}>{loginVariable}</h1>
 
-        {showNameField && (
+        {showEmailField && (
           <input
             className={styles.input}
-            value={name}
+            value={email}
             type="text"
-            placeholder="Name"
-            onChange={(e) => setName(e.target.value)}
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
           />
         )}
-        <input
-          className={styles.input}
-          value={email}
-          type="text"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-        ></input>
-        <input
-          className={styles.input}
-          value={password}
-          type="text"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-        ></input>
-        <button className={styles.loginButton} type="submit">
-          {loginVariable}
-        </button>
+        {!userLoggedIn && (
+          <>
+            <input
+              className={styles.input}
+              value={name}
+              type="text"
+              placeholder="User Name"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              className={styles.input}
+              value={password}
+              type="text"
+              placeholder={pwFieldVariable}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button className={styles.loginButton} type="submit">
+              {loginVariable}
+            </button>
+          </>
+        )}
+        {userLoggedIn && (
+          <button className={styles.logoutButton} type="submit">
+            {loginVariable}
+          </button>
+        )}
       </form>
     </div>
   );

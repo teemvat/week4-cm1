@@ -7,6 +7,7 @@ import SignupPage from "./SignupPage/SignupPage";
 const Layout = () => {
   const [isModalOpen, setIsModalOpen] = useState("invisible");
   const [loginName, setLoginName]=useState('Login')
+
   // Function to open modal
   const openModal = () => {
     setIsModalOpen("visible");

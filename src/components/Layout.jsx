@@ -1,7 +1,23 @@
 import { Outlet, Link } from "react-router-dom";
 import "./Layout.css";
+import {useState} from 'react';
+
+import SignupPage from "./SignupPage/SignupPage";
 
 const Layout = () => {
+  const [isModalOpen, setIsModalOpen] = useState("invisible");
+  const [loginName, setLoginName]=useState('Login')
+
+  // Function to open modal
+  const openModal = () => {
+    setIsModalOpen("visible");
+  };
+
+  // Function to close modal
+  const closeModal = () => {
+    setIsModalOpen("invisible");
+  };
+  
   return (
     <>
       <nav className="navbar">
@@ -22,7 +38,7 @@ const Layout = () => {
             <Link to="/shoppingcart">ShoppingCart</Link>
           </li>
           <li>
-            <Link to="/signup">SignupPage</Link>
+          <Link to="#" onClick={() => openModal()}>{loginName}</Link>
           </li>
         </ul>
       </nav>
@@ -30,6 +46,8 @@ const Layout = () => {
       <main className="page-content">
         <Outlet />
       </main>
+      <SignupPage isModalOpen={isModalOpen} closeModal={closeModal} loginName={setLoginName} />
+
     </>
   );
 };

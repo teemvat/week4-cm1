@@ -30,11 +30,11 @@ function ContactListManager() {
   };
 
   return (
-    <div>
+    <div className="contact-list-container">
       <h1>Contact List Manager</h1>
       
-      <form onSubmit={addContact}>
-        <div>
+      <form onSubmit={addContact} className="contact-form">
+        <div className="form-group">
           <label>Name: </label>
           <input
             type="text"
@@ -45,7 +45,7 @@ function ContactListManager() {
           />
         </div>
         
-        <div>
+        <div className="form-group">
           <label>Email: </label>
           <input
             type="email"
@@ -56,7 +56,7 @@ function ContactListManager() {
           />
         </div>
         
-        <div>
+        <div className="form-group">
           <label>Phone: </label>
           <input
             type="tel"
@@ -67,11 +67,11 @@ function ContactListManager() {
           />
         </div>
 
-        <button type="submit">Add Contact</button>
+        <button type="submit" className="btn">Add Contact</button>
       </form>
 
       <h2>Contact List</h2>
-      <ul>
+      <ul className="contact-list">
         {contacts.map((contact) => (
           <div 
               id='ContactBox' 
@@ -82,7 +82,7 @@ function ContactListManager() {
                 <p>Name: {contact.name}</p>
                 <p>Email: {contact.email}</p>
                 <p>Phone: {contact.phone}</p>
-                <button onClick={() => deleteContact(contact.id)}>Delete</button>
+                <button onClick={() => deleteContact(contact.id)} className="btn btn-delete">Delete</button>
               </li>
 
           </div>

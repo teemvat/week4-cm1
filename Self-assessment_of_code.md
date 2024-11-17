@@ -65,3 +65,19 @@
 - There is no input validation for the text fields. I could've added a function to prevent empty fields.
 
 - The code doesn't have any error handling for the state variables or input errors
+
+---
+
+### <ins>Recipe Manager (Mira)</ins>
+
+### Pros:
+
+- Structure: Clear, functional structure
+- Code Readability
+- Maintainability: Modular approach
+- Styling: Responsive input field, good contrast, clean and minimalistic styles
+
+### Areas for Improvement:
+
+- Erros Handling: No error handling
+- Accessibility: Could add labels for better user experience

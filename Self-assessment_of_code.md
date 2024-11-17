@@ -49,3 +49,19 @@
 - using f5 drops login
 
 --- 
+
+### <ins>Book Collection Manager (Teemu)</ins>
+
+### Pros:
+
+- State Management: The code has the useState hook to manage state of the fields and the books.
+
+- Tailwind styles I used Tailwind for the styles, as I' planning to use it on the project as well. 
+
+- Readability: I think the code is easy to read and understand.
+
+### Areas for Improvement:
+
+- There is no input validation for the text fields. I could've added a function to prevent empty fields.
+
+- The code doesn't have any error handling for the state variables or input errors

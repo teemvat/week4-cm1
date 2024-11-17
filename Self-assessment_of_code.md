@@ -31,3 +31,21 @@
 - could use common/shared naming conventions
 
 --- 
+
+
+### <ins>Singup Page (Login/singup)(Ville)</ins>
+#### SingupPageStyle.js:
+
+##### Pros:
+- One component handles both login and singup by recognizing if user exists or not or is user logged in or not.
+- Modal- style- not page. Looks great. Doesn change page where you are so easier to continue using site.
+- has comments that tell about different sections
+- interactive (e.g hovers and selections)
+- checks if password is weak by using regex and checks if email has @ or not.
+- changes  login to user name in nav bar after logged in
+- can logout by pressing user name from navbar
+  ##### Cons:
+- maybe code could have been done more clearer and easier? 
+- using f5 drops login
+
+--- 
